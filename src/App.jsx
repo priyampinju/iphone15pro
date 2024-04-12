@@ -1,5 +1,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
   // useGSAP(() => {
@@ -88,15 +92,39 @@ const App = () => {
 
   // // // gsap Stagger
 
+  // useGSAP(() => {
+  //   gsap.to(".stagger-box", {
+  //     y: 250,
+  //     rotation: 360,
+  //     borderRadius: "100%",
+  //     repeat: -1,
+  //     yoyo: true,
+  // stagger: 0.05,
+  // ease: "circ.inOut",
+
+  // stagger: {
+  // amount: 0.7,
+  // ease: "circ.inOut",
+  // grid: [2, 1],
+  // axis: "y",
+  // },
+  // });
+  // }, []);
+
+  // // // Gsap Scroll Trigger
+  // // // it is a plugin. So we have to import it first
+
+  const scrollRef = useRef();
   useGSAP(() => {
-    gsap.to(".stagger-box", {
-      y: 250,
-      rotation: 360,
-      borderRadius: "100%",
-      repeat: -1,
-      yoyo: true,
-      stagger: 0.05,
-      ease: "circ.inOut",
+    const boxes = gsap.utils.toArray(scrollRef.current.children);
+
+    boxes.forEach((box) => {
+      gsap.to(box, {
+        x: 150,
+        rotation: 360,
+        scale: 1.5,
+        borderRadius: "100%",
+      });
     });
   }, []);
 
@@ -104,10 +132,10 @@ const App = () => {
     <main>
       <h1>GsapTo</h1>
 
-      <div className="mt-10 rounded-3xl w-[1150px] p-5 bg-slate-500">
+      {/* <div className="mt-10 rounded-3xl w-[1150px] p-5 bg-slate-500">
         <div id="blue-box" className="w-20 h-20 bg-blue-500 " />
-      </div>
-      <div className="mt-10 ml-5 pl-3">
+      </div> */}
+      {/* <div className="mt-10 ml-5 pl-3">
         <button
           onClick={() => {
             if (timeline.paused()) {
@@ -120,8 +148,8 @@ const App = () => {
         >
           Play/Pause
         </button>
-      </div>
-
+      </div> */}
+      {/* 
       <div className="mt-10">
         <div className="flex gap-5">
           <div className="w-20 h-20 bg-indigo-200 rounded-lg stagger-box"></div>
@@ -133,6 +161,20 @@ const App = () => {
           <div className="w-20 h-20 bg-indigo-800 rounded-lg stagger-box"></div>
           <div className="w-20 h-20 bg-indigo-900 rounded-lg stagger-box"></div>
         </div>
+      </div> */}
+
+      <h2>gsap.scrollTrigger</h2>
+
+      <div className="mt-20 ml-20 w-full h-screen">
+        <div
+          id="scroll-pink"
+          className="scroll-box w-20 h-20 bg-pink-500 rounded-lg"
+        ></div>
+
+        <div
+          className="scroll-box w-20 h-20 rounded-lg bg-orange-500"
+          id="scroll-orange"
+        ></div>
       </div>
     </main>
   );
