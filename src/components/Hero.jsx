@@ -21,8 +21,8 @@ const Hero = () => {
           iPhone 15 pro
         </p>
         <div className="md:w-10/12 w-9/12">
-          <video>
-            <source src={videoSrc} />
+          <video autoPlay muted playsInline={true} key={videoSrc}>
+            <source src={videoSrc} type="video/mp4" />
           </video>
         </div>
       </div>
