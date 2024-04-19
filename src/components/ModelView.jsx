@@ -1,4 +1,4 @@
-import { View } from "@react-three/drei";
+import { PerspectiveCamera, OrbitControls, View } from "@react-three/drei";
 
 import * as THREE from "three";
 import Lights from "./Lights";
@@ -6,27 +6,35 @@ import Loader from "./Loader";
 import Iphone from "./Iphone";
 import { Suspense } from "react";
 
-const ModelView = ({ index }) => {
+const ModelView = ({
+  index,
+  groupRef,
+  gsapType,
+  controlRef,
+  setRotationState,
+  item,
+  size,
+}) => {
   return (
-    <div className="modelview flex justify-center items-center h-full">
-      Your browser does not support 3D models.
-    </div>
+    // <div className="modelview flex justify-center items-center h-full">
+    //   Your browser does not support 3D models.
+    // </div>
 
-    // <View
-    //   index={index}
-    //   id={gsapType}
-    //   className={` border-2 border-red-500 w-full h-full absolute ${
-    //     index === 2 ? "right-[-100%]" : ""
-    //   }`}
-    // >
-    /* Ambient Light */
-    /* <ambientLight intensity={0.3} /> */
+    <View
+      index={index}
+      id={gsapType}
+      className={` border-2 border-red-500 w-full h-full absolute ${
+        index === 2 ? "right-[-100%]" : ""
+      }`}
+    >
+      {/* /* Ambient Light */}
+      <ambientLight intensity={0.3} />
 
-    /* <PerspectiveCamera makeDefault position={[0, 0, 4]} /> */
+      <PerspectiveCamera makeDefault position={[0, 0, 4]} />
 
-    /* <Lights /> */
+      <Lights />
 
-    /* <OrbitControls
+      <OrbitControls
         makeDefault
         ref={controlRef}
         enableZoom={false}
@@ -48,8 +56,8 @@ const ModelView = ({ index }) => {
             size={size}
           />
         </Suspense>
-      </group> */
-    // </View>
+      </group>
+    </View>
   );
 };
 
